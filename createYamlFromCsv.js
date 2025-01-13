@@ -1,8 +1,14 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 const yaml = require('js-yaml');
+const { argv } = require('node:process');
 
-const inputFile = 'input.csv';
+argv.forEach((val, index) => {
+  console.log(`${index}: ${val}`);
+});
+
+
+const inputFile = argv[2];
 const outputFile = 'output.yaml';
 
 const data = {};
@@ -53,7 +59,7 @@ fs.createReadStream(inputFile)
       name: member + surname,
       user: member.toLowerCase().replace(/ /g, ''),
       email: email,
-      external: true,
+      "x-itop-external": true,
       roles: [{ name: role ? role : 'petclinic developer' }],
     });
   })
@@ -64,7 +70,8 @@ fs.createReadStream(inputFile)
     orgs.forEach((org) => {
       const orgName = org.name;
       const serviceName = `${orgName}-Petclinic`;
-      const slaName = `${serviceName}Sla`;
+      const slaNameGold = `${serviceName}-gold`;
+      const slaNameSilver = `${serviceName}-silver`;
 
       // Define the service
       const service = {
@@ -74,11 +81,11 @@ fs.createReadStream(inputFile)
         customers: [
           {
             name: `${orgName}-client-gold`,
-            sla: slaName
+            sla: slaNameGold
           },
           {
             name: `${orgName}-client-silver`,
-            sla: slaName
+            sla: slaNameSilver
           }
         ]
       };
@@ -86,7 +93,7 @@ fs.createReadStream(inputFile)
 
       // Define the SLA
       slas.push({
-        name: slaName,
+        name: slaNameGold,
         guarantees: [
           {
             scope: {
@@ -111,6 +118,32 @@ fs.createReadStream(inputFile)
         ]
       });
 
+      slas.push({
+        name: slaNameSilver,
+        guarantees: [
+          {
+            scope: {
+              'x-itop-priority': '*',
+              'x-itop-request-type': '*'
+            },
+            objectives: {
+              ttr: {
+                max: {
+                  value: 24,
+                  unit: 'hours'
+                }
+              },
+              tto: {
+                max: {
+                  value: 24,
+                  unit: 'hours'
+                }
+              }
+            }
+          }
+        ]
+      });
+
       // Add consumers (new organizations with specific users)
       const consumers = [
         {
@@ -118,7 +151,7 @@ fs.createReadStream(inputFile)
           code: `${orgName.replace(/ /g, '').toUpperCase()}-GOLD`,
           teams: [
             {
-              name: 'Gold clients team',
+              name: `${orgName} Gold clients team`,
               'x-itop-profiles': [
                 { 'x-itop-profile': 'Portal power user' },
                 { 'x-itop-profile': 'Portal user' }
@@ -136,7 +169,7 @@ fs.createReadStream(inputFile)
           code: `${orgName.replace(/ /g, '').toUpperCase()}-SILVER`,
           teams: [
             {
-              name: 'Silver clients Team',
+              name: `${orgName} Silver clients team`,
               'x-itop-profiles': [
                 { 'x-itop-profile': 'Portal power user' },
                 { 'x-itop-profile': 'Portal user' }
