@@ -222,7 +222,7 @@ fs.createReadStream(inputFile)
             user: memberCode,
             email: `${clientOrgName.toLowerCase()}s${i}@example.com`,
             roles: [{ name: `itop${type.charAt(0).toUpperCase() + type.slice(1)}ClientUser` }],
-            'x-itop-default-password': getValidMasterUserEmail(type, clientOrgName)
+            'x-itop-default-password': passwordPrefix + getValidMasterUserEmail(type, clientOrgName)
           });
         }
       }
