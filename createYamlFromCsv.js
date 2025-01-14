@@ -7,17 +7,36 @@ argv.forEach((val, index) => {
   console.log(`${index}: ${val}`);
 });
 
-
 const inputFile = argv[2];
 const outputFile = 'output.yaml';
+const passwordPrefix = argv[3]
+const min = parseInt(argv[4], 10);
+const max = parseInt(argv[5], 10);
+const numGoldMembers = parseInt(argv[6], 10);
+const numSilverMembers = parseInt(argv[7], 10);
 
 const data = {};
 const orgs = [];
+const emailMap = {}; // Map to store emails by organization
+const masterUserAssignments = {}; // Track master-user assignments
+const providerEmails = {}; // Map to track provider organization emails
 
 fs.createReadStream(inputFile)
   .pipe(csv({ start: 2 }))
   .on('data', (row) => {
     const { organization, team, member, surname, email, role } = row;
+
+    // Collect emails grouped by organization
+    if (!emailMap[organization]) {
+      emailMap[organization] = [];
+    }
+    emailMap[organization].push(email);
+
+    // Track emails for provider organizations
+    if (!providerEmails[organization]) {
+      providerEmails[organization] = new Set();
+    }
+    providerEmails[organization].add(email);
 
     if (!data[organization]) {
       data[organization] = {
@@ -64,8 +83,11 @@ fs.createReadStream(inputFile)
     });
   })
   .on('end', () => {
-    // Add services and SLAs
     const slas = [];
+
+    // Shuffle emails for random assignment
+    const allEmails = Object.values(emailMap).flat().sort(() => Math.random() - 0.5);
+    allEmails.forEach(email => masterUserAssignments[email] = { gold: 0, silver: 0 });
 
     orgs.forEach((org) => {
       const orgName = org.name;
@@ -156,11 +178,7 @@ fs.createReadStream(inputFile)
                 { 'x-itop-profile': 'Portal power user' },
                 { 'x-itop-profile': 'Portal user' }
               ],
-              members: [
-                { name: `${orgName}-G1`, user: `${orgName}-G1`, email: `${orgName}g1@example.com`, roles: [{ name: 'itopGoldClientUser' }] },
-                { name: `${orgName}-G2`, user: `${orgName}-G2`, email: `${orgName}g2@example.com`, roles: [{ name: 'itopGoldClientUser' }] },
-                { name: `${orgName}-G3`, user: `${orgName}-G3`, email: `${orgName}g3@example.com`, roles: [{ name: 'itopGoldClientUser' }] }
-              ]
+              members: generateClientMembers('gold', orgName)
             }
           ]
         },
@@ -174,17 +192,54 @@ fs.createReadStream(inputFile)
                 { 'x-itop-profile': 'Portal power user' },
                 { 'x-itop-profile': 'Portal user' }
               ],
-              members: [
-                { name: `${orgName}-S1`, user: `${orgName}-S1`, email: `${orgName}s1@example.com`, roles: [{ name: 'itopSilverClientUser' }] },
-                { name: `${orgName}-S2`, user: `${orgName}-S2`, email: `${orgName}s2@example.com`, roles: [{ name: 'itopSilverClientUser' }] },
-                { name: `${orgName}-S3`, user: `${orgName}-S3`, email: `${orgName}s3@example.com`, roles: [{ name: 'itopSilverClientUser' }] }
-              ]
+              members: generateClientMembers('silver', orgName)
             }
           ]
         }
       ];
       orgs.push(...consumers);
     });
+
+    function generateClientMembers(type, clientOrgName) {
+      const members = [];
+      if(type === 'gold'){
+        for (let i = 1; i <= numGoldMembers; i++) {
+          const memberCode = `${clientOrgName}-G${i}`;
+          members.push({
+            name: memberCode,
+            user: memberCode,
+            email: `${clientOrgName.toLowerCase()}g${i}@example.com`,
+            roles: [{ name: `itop${type.charAt(0).toUpperCase() + type.slice(1)}ClientUser` }],
+            'x-itop-default-password': passwordPrefix + getValidMasterUserEmail(type, clientOrgName)
+          });
+        }
+      }
+      if(type === 'silver'){
+        for (let i = 1; i <= numSilverMembers; i++) {
+          const memberCode = `${clientOrgName}-S${i}`;
+          members.push({
+            name: memberCode,
+            user: memberCode,
+            email: `${clientOrgName.toLowerCase()}s${i}@example.com`,
+            roles: [{ name: `itop${type.charAt(0).toUpperCase() + type.slice(1)}ClientUser` }],
+            'x-itop-default-password': getValidMasterUserEmail(type, clientOrgName)
+          });
+        }
+      }
+      return members;
+    }
+
+    function getValidMasterUserEmail(type, clientOrgName) {
+      let validEmails = allEmails.filter(email => !providerEmails[clientOrgName].has(email));
+      let selectedEmail = validEmails.find(email => masterUserAssignments[email][type] < min && masterUserAssignments[email][type] < max);
+
+      if (!selectedEmail) {
+        selectedEmail = validEmails[Math.floor(Math.random() * validEmails.length)];
+      }
+
+      masterUserAssignments[selectedEmail][type]++;
+      return selectedEmail;
+    }
 
     const yamlData = {
       context: { id: 1, version: 1, config: { 'service-chain-type': 'faceted' }, 'chain-name': "PSG2 Petclinic model", description: "This is the service chain model from PSG2 subject" },
