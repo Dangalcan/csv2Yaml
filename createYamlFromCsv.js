@@ -13,7 +13,7 @@ const passwordPrefix = argv[3]
 const min = parseInt(argv[4], 10);
 const max = parseInt(argv[5], 10);
 const numGoldMembers = parseInt(argv[6], 10);
-const numSilverMembers = parseInt(argv[7], 10);
+const numPlatinumMembers = parseInt(argv[7], 10);
 
 const data = {};
 const orgs = [];
@@ -87,13 +87,13 @@ fs.createReadStream(inputFile)
 
     // Shuffle emails for random assignment
     const allEmails = Object.values(emailMap).flat().sort(() => Math.random() - 0.5);
-    allEmails.forEach(email => masterUserAssignments[email] = { gold: 0, silver: 0 });
+    allEmails.forEach(email => masterUserAssignments[email] = { gold: 0, platinum: 0 });
 
     orgs.forEach((org) => {
       const orgName = org.name;
       const serviceName = `${orgName}-Petclinic`;
       const slaNameGold = `${serviceName}-gold`;
-      const slaNameSilver = `${serviceName}-silver`;
+      const slaNamePlatinum = `${serviceName}-platinum`;
 
       // Define the service
       const service = {
@@ -106,8 +106,8 @@ fs.createReadStream(inputFile)
             sla: slaNameGold
           },
           {
-            name: `${orgName}-client-silver`,
-            sla: slaNameSilver
+            name: `${orgName}-client-platinum`,
+            sla: slaNamePlatinum
           }
         ]
       };
@@ -141,7 +141,7 @@ fs.createReadStream(inputFile)
       });
 
       slas.push({
-        name: slaNameSilver,
+        name: slaNamePlatinum,
         guarantees: [
           {
             scope: {
@@ -183,16 +183,16 @@ fs.createReadStream(inputFile)
           ]
         },
         {
-          name: `${orgName}-client-silver`,
-          code: `${orgName.replace(/ /g, '').toUpperCase()}-SILVER`,
+          name: `${orgName}-client-platinum`,
+          code: `${orgName.replace(/ /g, '').toUpperCase()}-PLATINUM`,
           teams: [
             {
-              name: `${orgName} Silver clients team`,
+              name: `${orgName} Platinum clients team`,
               'x-itop-profiles': [
                 { 'x-itop-profile': 'Portal power user' },
                 { 'x-itop-profile': 'Portal user' }
               ],
-              members: generateClientMembers('silver', orgName)
+              members: generateClientMembers('platinum', orgName)
             }
           ]
         }
@@ -214,13 +214,13 @@ fs.createReadStream(inputFile)
           });
         }
       }
-      if(type === 'silver'){
-        for (let i = 1; i <= numSilverMembers; i++) {
-          const memberCode = `${clientOrgName}-S${i}`;
+      if(type === 'platinum'){
+        for (let i = 1; i <= numPlatinumMembers; i++) {
+          const memberCode = `${clientOrgName}-P${i}`;
           members.push({
             name: memberCode,
             user: memberCode,
-            email: `${clientOrgName.toLowerCase()}s${i}@example.com`,
+            email: `${clientOrgName.toLowerCase()}p${i}@example.com`,
             roles: [{ name: `itop${type.charAt(0).toUpperCase() + type.slice(1)}ClientUser` }],
             'x-itop-default-password': passwordPrefix + getValidMasterUserEmail(type, clientOrgName)
           });
