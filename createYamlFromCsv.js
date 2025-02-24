@@ -24,8 +24,8 @@ const providerEmails = {}; // Map to track provider organization emails
 fs.createReadStream(inputFile)
   .pipe(csv({ start: 2 }))
   .on('data', (row) => {
-    const { organization, team, member, surname, email, role } = row;
-
+    const { surname, name, uvus, email, organization, role } = row;
+    const team = organization + ' team'
     // Collect emails grouped by organization
     if (!emailMap[organization]) {
       emailMap[organization] = [];
@@ -75,8 +75,8 @@ fs.createReadStream(inputFile)
     }
 
     orgs[orgIndex].teams[teamIndex].members.push({
-      name: member + surname,
-      user: member.toLowerCase().replace(/ /g, ''),
+      name: name + ' ' + surname,
+      user: uvus.replace(/ /g, ''),
       email: email,
       "x-itop-external": true,
       roles: [{ name: role ? role : 'petclinic developer' }],
@@ -86,9 +86,9 @@ fs.createReadStream(inputFile)
     const slas = [];
 
     // Shuffle emails for random assignment
-    const allEmails = Object.values(emailMap).flat().sort(() => Math.random() - 0.5);
+    const allEmails = Object.values(emailMap).flat();
     allEmails.forEach(email => masterUserAssignments[email] = { gold: 0, platinum: 0 });
-
+    
     orgs.forEach((org) => {
       const orgName = org.name;
       const serviceName = `${orgName}-Petclinic`;
@@ -231,12 +231,16 @@ fs.createReadStream(inputFile)
 
     function getValidMasterUserEmail(type, clientOrgName) {
       let validEmails = allEmails.filter(email => !providerEmails[clientOrgName].has(email));
-      let selectedEmail = validEmails.find(email => masterUserAssignments[email][type] < min && masterUserAssignments[email][type] < max);
-
-      if (!selectedEmail) {
-        selectedEmail = validEmails[Math.floor(Math.random() * validEmails.length)];
+      let selectedEmail = validEmails.filter(email => (masterUserAssignments[email]['platinum'] + masterUserAssignments[email]['gold']) < min);
+ 
+      if (selectedEmail.length == 0) {
+        selectedEmail = validEmails.filter(email => (masterUserAssignments[email]['platinum'] + masterUserAssignments[email]['gold']) < max);
       }
-
+      if (selectedEmail.length == 0) {
+        selectedEmail = validEmails[Math.floor(Math.random() * validEmails.length)];
+      } else {
+        selectedEmail = selectedEmail[Math.floor(Math.random() * selectedEmail.length)];
+      }
       masterUserAssignments[selectedEmail][type]++;
       return selectedEmail;
     }
