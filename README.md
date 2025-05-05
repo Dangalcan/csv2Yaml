@@ -8,6 +8,7 @@ node .\createYamlFromCsv.js input.csv PSG2-2425 1 3 5 4
 node .\createYamlFromCsv.js input2.csv PSG2-2425 1 2 3 3
 
 Where:
+
 1. input.csv is the route to your csv
 2. PSG2-2425 is the password prefix
 3. 1 is the min number of iTop users that a students should have
