@@ -1,0 +1,49 @@
+{
+  "rrodriguez@us.es": [],
+  "salvarez@us.es": [],
+  "julia@gmail.com": [
+    "OrgName2-Petclinic-G3",
+    "OrgName2-Petclinic-G4",
+    "OrgName2-Petclinic-G5"
+  ],
+  "pedro@gmail.com": [
+    "OrgName2-Petclinic-G1",
+    "OrgName2-Petclinic-P2",
+    "OrgName3-Petclinic-G4"
+  ],
+  "maria@gmail.com": [
+    "OrgName2-Petclinic-G2",
+    "OrgName3-Petclinic-G2",
+    "OrgName3-Petclinic-G5",
+    "OrgName3-Petclinic-P3",
+    "OrgName3-Petclinic-P4"
+  ],
+  "josema@gmail.com": [
+    "OrgName1-Petclinic-G3",
+    "OrgName1-Petclinic-P3",
+    "OrgName1-Petclinic-P4"
+  ],
+  "raquel@gmail.com": [
+    "OrgName1-Petclinic-G5",
+    "OrgName3-Petclinic-P1",
+    "OrgName3-Petclinic-P2"
+  ],
+  "iratxe@gmail.com": [
+    "OrgName1-Petclinic-G2",
+    "OrgName3-Petclinic-G1",
+    "OrgName3-Petclinic-G3"
+  ],
+  "pedra@gmail.com": [
+    "OrgName1-Petclinic-P1",
+    "OrgName2-Petclinic-P3"
+  ],
+  "juana@gmail.com": [
+    "OrgName1-Petclinic-G1",
+    "OrgName2-Petclinic-P1"
+  ],
+  "paulo@gmail.com": [
+    "OrgName1-Petclinic-G4",
+    "OrgName1-Petclinic-P2",
+    "OrgName2-Petclinic-P4"
+  ]
+}
