@@ -1,0 +1,124 @@
+flowchart RL
+    PSG2S-TAFF["PSG2-2425-Staff"]
+    style PSG2S-TAFF fill:#CCCCCC,stroke:#CCCCCC
+    ORGNAME1-PETCLINIC["OrgName1-Petclinic"]
+    style ORGNAME1-PETCLINIC fill:#CCCCCC,stroke:#CCCCCC
+    ORGNAME2-PETCLINIC["OrgName2-Petclinic"]
+    style ORGNAME2-PETCLINIC fill:#CCCCCC,stroke:#CCCCCC
+    ORGNAME3-PETCLINIC["OrgName3-Petclinic"]
+    style ORGNAME3-PETCLINIC fill:#CCCCCC,stroke:#CCCCCC
+        PSG2S-TAFF --- PSG2_Support(["PSG2_Support 
+ "])
+        style PSG2_Support fill:#CCCCFF,stroke:#CCCCFF
+            PSG2_Support -.- Profesores
+            PSG2_Support --- PSG2STAFF-SLA --> ORGNAME1-PETCLINIC
+            PSG2_Support --- PSG2STAFF-SLA --> ORGNAME2-PETCLINIC
+            PSG2_Support --- PSG2STAFF-SLA --> ORGNAME3-PETCLINIC
+        ORGNAME1-PETCLINIC --- OrgName1-Petclinic-Petclinic(["OrgName1-Petclinic-Petclinic 
+ "])
+        style OrgName1-Petclinic-Petclinic fill:#CCCCFF,stroke:#CCCCFF
+            OrgName1-Petclinic-Petclinic -.- OrgName1-Petclinic_team
+            OrgName1-Petclinic-Petclinic --- OrgName1-Petclinic-Petclinic-gold --> ORGNAME1-PETCLINIC-GOLD
+            OrgName1-Petclinic-Petclinic --- OrgName1-Petclinic-Petclinic-platinum --> ORGNAME1-PETCLINIC-PLATINUM
+        ORGNAME2-PETCLINIC --- OrgName2-Petclinic-Petclinic(["OrgName2-Petclinic-Petclinic 
+ "])
+        style OrgName2-Petclinic-Petclinic fill:#CCCCFF,stroke:#CCCCFF
+            OrgName2-Petclinic-Petclinic -.- OrgName2-Petclinic_team
+            OrgName2-Petclinic-Petclinic --- OrgName2-Petclinic-Petclinic-gold --> ORGNAME2-PETCLINIC-GOLD
+            OrgName2-Petclinic-Petclinic --- OrgName2-Petclinic-Petclinic-platinum --> ORGNAME2-PETCLINIC-PLATINUM
+        ORGNAME3-PETCLINIC --- OrgName3-Petclinic-Petclinic(["OrgName3-Petclinic-Petclinic 
+ "])
+        style OrgName3-Petclinic-Petclinic fill:#CCCCFF,stroke:#CCCCFF
+            OrgName3-Petclinic-Petclinic -.- OrgName3-Petclinic_team
+            OrgName3-Petclinic-Petclinic --- OrgName3-Petclinic-Petclinic-gold --> ORGNAME3-PETCLINIC-GOLD
+            OrgName3-Petclinic-Petclinic --- OrgName3-Petclinic-Petclinic-platinum --> ORGNAME3-PETCLINIC-PLATINUM
+    OrgName1-Petclinic-Petclinic-gold{{TTO < 48hours\nTTR < 48hours}}
+        style OrgName1-Petclinic-Petclinic-gold fill:#FFCCCC,stroke:#FFCCCC
+    OrgName1-Petclinic-Petclinic-platinum{{TTO < 24hours\nTTR < 24hours}}
+        style OrgName1-Petclinic-Petclinic-platinum fill:#FFCCCC,stroke:#FFCCCC
+    OrgName2-Petclinic-Petclinic-gold{{TTO < 48hours\nTTR < 48hours}}
+        style OrgName2-Petclinic-Petclinic-gold fill:#FFCCCC,stroke:#FFCCCC
+    OrgName2-Petclinic-Petclinic-platinum{{TTO < 24hours\nTTR < 24hours}}
+        style OrgName2-Petclinic-Petclinic-platinum fill:#FFCCCC,stroke:#FFCCCC
+    OrgName3-Petclinic-Petclinic-gold{{TTO < 48hours\nTTR < 48hours}}
+        style OrgName3-Petclinic-Petclinic-gold fill:#FFCCCC,stroke:#FFCCCC
+    OrgName3-Petclinic-Petclinic-platinum{{TTO < 24hours\nTTR < 24hours}}
+        style OrgName3-Petclinic-Petclinic-platinum fill:#FFCCCC,stroke:#FFCCCC
+    PSG2STAFF-SLA{{TTO < 48hours\nTTR < 120hours}}
+        style PSG2STAFF-SLA fill:#FFCCCC,stroke:#FFCCCC
+    Profesores{{"Rubén Rodríguez - rrodriguez@us.es
+Sandra Álvarez - salvarez@us.es
+"}}
+    style Profesores fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName1-Petclinic_team{{"Julia Lopez De Vega  - julia@gmail.com
+Pedro Garcia Núñez - pedro@gmail.com
+Maria Sanchez Sanchez - maria@gmail.com
+"}}
+    style OrgName1-Petclinic_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName2-Petclinic_team{{"Josema Márquez Alonso  - josema@gmail.com
+Raquel Antonia Romero Oprescu  - raquel@gmail.com
+Iratxe Rodríguez Amarillo - iratxe@gmail.com
+"}}
+    style OrgName2-Petclinic_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName3-Petclinic_team{{"Pedra Sancház Zachnas - pedra@gmail.com
+Juana Juana Juana - juana@gmail.com
+Paulo Rubio Nales - paulo@gmail.com
+"}}
+    style OrgName3-Petclinic_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName1-Petclinic_Gold_clients_team{{"OrgName1-Petclinic-G1 - orgname1-petclinicg1@example.com
+OrgName1-Petclinic-G2 - orgname1-petclinicg2@example.com
+OrgName1-Petclinic-G3 - orgname1-petclinicg3@example.com
+OrgName1-Petclinic-G4 - orgname1-petclinicg4@example.com
+OrgName1-Petclinic-G5 - orgname1-petclinicg5@example.com
+"}}
+    style OrgName1-Petclinic_Gold_clients_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName1-Petclinic_Platinum_clients_team{{"OrgName1-Petclinic-P1 - orgname1-petclinicp1@example.com
+OrgName1-Petclinic-P2 - orgname1-petclinicp2@example.com
+OrgName1-Petclinic-P3 - orgname1-petclinicp3@example.com
+OrgName1-Petclinic-P4 - orgname1-petclinicp4@example.com
+"}}
+    style OrgName1-Petclinic_Platinum_clients_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName2-Petclinic_Gold_clients_team{{"OrgName2-Petclinic-G1 - orgname2-petclinicg1@example.com
+OrgName2-Petclinic-G2 - orgname2-petclinicg2@example.com
+OrgName2-Petclinic-G3 - orgname2-petclinicg3@example.com
+OrgName2-Petclinic-G4 - orgname2-petclinicg4@example.com
+OrgName2-Petclinic-G5 - orgname2-petclinicg5@example.com
+"}}
+    style OrgName2-Petclinic_Gold_clients_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName2-Petclinic_Platinum_clients_team{{"OrgName2-Petclinic-P1 - orgname2-petclinicp1@example.com
+OrgName2-Petclinic-P2 - orgname2-petclinicp2@example.com
+OrgName2-Petclinic-P3 - orgname2-petclinicp3@example.com
+OrgName2-Petclinic-P4 - orgname2-petclinicp4@example.com
+"}}
+    style OrgName2-Petclinic_Platinum_clients_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName3-Petclinic_Gold_clients_team{{"OrgName3-Petclinic-G1 - orgname3-petclinicg1@example.com
+OrgName3-Petclinic-G2 - orgname3-petclinicg2@example.com
+OrgName3-Petclinic-G3 - orgname3-petclinicg3@example.com
+OrgName3-Petclinic-G4 - orgname3-petclinicg4@example.com
+OrgName3-Petclinic-G5 - orgname3-petclinicg5@example.com
+"}}
+    style OrgName3-Petclinic_Gold_clients_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    OrgName3-Petclinic_Platinum_clients_team{{"OrgName3-Petclinic-P1 - orgname3-petclinicp1@example.com
+OrgName3-Petclinic-P2 - orgname3-petclinicp2@example.com
+OrgName3-Petclinic-P3 - orgname3-petclinicp3@example.com
+OrgName3-Petclinic-P4 - orgname3-petclinicp4@example.com
+"}}
+    style OrgName3-Petclinic_Platinum_clients_team fill:#FFFFCC,stroke:#FFFFCC,stroke-width:2px
+    ORGNAME1-PETCLINIC-GOLD["OrgName1-Petclinic-client-gold "]
+    style ORGNAME1-PETCLINIC-GOLD fill:#CCCCCC,stroke:#CCCCCC
+    OrgName1-Petclinic_Gold_clients_team -.- ORGNAME1-PETCLINIC-GOLD
+    ORGNAME1-PETCLINIC-PLATINUM["OrgName1-Petclinic-client-platinum "]
+    style ORGNAME1-PETCLINIC-PLATINUM fill:#CCCCCC,stroke:#CCCCCC
+    OrgName1-Petclinic_Platinum_clients_team -.- ORGNAME1-PETCLINIC-PLATINUM
+    ORGNAME2-PETCLINIC-GOLD["OrgName2-Petclinic-client-gold "]
+    style ORGNAME2-PETCLINIC-GOLD fill:#CCCCCC,stroke:#CCCCCC
+    OrgName2-Petclinic_Gold_clients_team -.- ORGNAME2-PETCLINIC-GOLD
+    ORGNAME2-PETCLINIC-PLATINUM["OrgName2-Petclinic-client-platinum "]
+    style ORGNAME2-PETCLINIC-PLATINUM fill:#CCCCCC,stroke:#CCCCCC
+    OrgName2-Petclinic_Platinum_clients_team -.- ORGNAME2-PETCLINIC-PLATINUM
+    ORGNAME3-PETCLINIC-GOLD["OrgName3-Petclinic-client-gold "]
+    style ORGNAME3-PETCLINIC-GOLD fill:#CCCCCC,stroke:#CCCCCC
+    OrgName3-Petclinic_Gold_clients_team -.- ORGNAME3-PETCLINIC-GOLD
+    ORGNAME3-PETCLINIC-PLATINUM["OrgName3-Petclinic-client-platinum "]
+    style ORGNAME3-PETCLINIC-PLATINUM fill:#CCCCCC,stroke:#CCCCCC
+    OrgName3-Petclinic_Platinum_clients_team -.- ORGNAME3-PETCLINIC-PLATINUM

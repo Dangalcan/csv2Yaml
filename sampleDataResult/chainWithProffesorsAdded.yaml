@@ -1,0 +1,465 @@
+context:
+  id: 1
+  version: 1
+  config:
+    service-chain-type: faceted
+  chain-name: PSG2 Petclinic model
+  description: This is the service chain model from PSG2 subject
+orgs:
+  - name: PSG2-2425-Staff
+    code: PSG2S-TAFF
+    teams:
+      - name: Profesores
+        x-itop-profiles:
+          - x-itop-profile: Administrator
+        members:
+          - name: 'Rubén Rodríguez'
+            user: rubrod
+            email: rrodriguez@us.es
+            x-itop-external: true
+            roles:
+             - name: Profesor
+          - name: 'Sandra Álvarez'
+            user: sanalv
+            email: salvarez@us.es
+            x-itop-external: true
+            roles:
+             - name: Profesor
+    services:
+      - name: PSG2 Support
+        description: Servicio de apoyo de PSG2
+        teams:
+          - name: Profesores
+        customers:
+          - name: OrgName1-Petclinic
+            sla: PSG2STAFF-SLA
+          - name: OrgName2-Petclinic
+            sla: PSG2STAFF-SLA
+          - name: OrgName3-Petclinic
+            sla: PSG2STAFF-SLA
+  - name: OrgName1-Petclinic
+    code: ORGNAME1-PETCLINIC
+    teams:
+      - name: OrgName1-Petclinic team
+        x-itop-profiles:
+          - x-itop-profile: Configuration Manager
+          - x-itop-profile: Service Desk Agent
+          - x-itop-profile: Support Agent
+          - x-itop-profile: Problem Manager
+          - x-itop-profile: Service Manager
+        members:
+          - name: 'Julia Lopez De Vega '
+            user: julopveg
+            email: julia@gmail.com
+            x-itop-external: true
+            roles:
+              - name: profesor
+          - name: Pedro Garcia Núñez
+            user: pedgarnun
+            email: pedro@gmail.com
+            x-itop-external: true
+            roles:
+              - name: alumno
+          - name: Maria Sanchez Sanchez
+            user: marsasa
+            email: maria@gmail.com
+            x-itop-external: true
+            roles:
+              - name: alumno
+    services:
+      - name: OrgName1-Petclinic-Petclinic
+        description: Servicio de OrgName1-Petclinic
+        teams:
+          - name: OrgName1-Petclinic team
+        customers:
+          - name: OrgName1-Petclinic-client-gold
+            sla: OrgName1-Petclinic-Petclinic-gold
+          - name: OrgName1-Petclinic-client-platinum
+            sla: OrgName1-Petclinic-Petclinic-platinum
+  - name: OrgName2-Petclinic
+    code: ORGNAME2-PETCLINIC
+    teams:
+      - name: OrgName2-Petclinic team
+        x-itop-profiles:
+          - x-itop-profile: Configuration Manager
+          - x-itop-profile: Service Desk Agent
+          - x-itop-profile: Support Agent
+          - x-itop-profile: Problem Manager
+          - x-itop-profile: Service Manager
+        members:
+          - name: 'Josema Márquez Alonso '
+            user: josmaralo
+            email: josema@gmail.com
+            x-itop-external: true
+            roles:
+              - name: alumno
+          - name: 'Raquel Antonia Romero Oprescu '
+            user: raqromopr
+            email: raquel@gmail.com
+            x-itop-external: true
+            roles:
+              - name: alumno
+          - name: Iratxe Rodríguez Amarillo
+            user: irarodama
+            email: iratxe@gmail.com
+            x-itop-external: true
+            roles:
+              - name: alumno
+    services:
+      - name: OrgName2-Petclinic-Petclinic
+        description: Servicio de OrgName2-Petclinic
+        teams:
+          - name: OrgName2-Petclinic team
+        customers:
+          - name: OrgName2-Petclinic-client-gold
+            sla: OrgName2-Petclinic-Petclinic-gold
+          - name: OrgName2-Petclinic-client-platinum
+            sla: OrgName2-Petclinic-Petclinic-platinum
+  - name: OrgName3-Petclinic
+    code: ORGNAME3-PETCLINIC
+    teams:
+      - name: OrgName3-Petclinic team
+        x-itop-profiles:
+          - x-itop-profile: Configuration Manager
+          - x-itop-profile: Service Desk Agent
+          - x-itop-profile: Support Agent
+          - x-itop-profile: Problem Manager
+          - x-itop-profile: Service Manager
+        members:
+          - name: Pedra Sancház Zachnas
+            user: pedsanzac
+            email: pedra@gmail.com
+            x-itop-external: true
+            roles:
+              - name: alumno
+          - name: Juana Juana Juana
+            user: juajuajua
+            email: juana@gmail.com
+            x-itop-external: true
+            roles:
+              - name: alumno
+          - name: Paulo Rubio Nales
+            user: paurubnal
+            email: paulo@gmail.com
+            x-itop-external: true
+            roles:
+              - name: petclinic developer
+    services:
+      - name: OrgName3-Petclinic-Petclinic
+        description: Servicio de OrgName3-Petclinic
+        teams:
+          - name: OrgName3-Petclinic team
+        customers:
+          - name: OrgName3-Petclinic-client-gold
+            sla: OrgName3-Petclinic-Petclinic-gold
+          - name: OrgName3-Petclinic-client-platinum
+            sla: OrgName3-Petclinic-Petclinic-platinum
+  - name: OrgName1-Petclinic-client-gold
+    code: ORGNAME1-PETCLINIC-GOLD
+    teams:
+      - name: OrgName1-Petclinic Gold clients team
+        x-itop-profiles:
+          - x-itop-profile: Portal power user
+          - x-itop-profile: Portal user
+        members:
+          - name: OrgName1-Petclinic-G1
+            user: OrgName1-Petclinic-G1
+            email: orgname1-petclinicg1@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425juana@gmail.com
+          - name: OrgName1-Petclinic-G2
+            user: OrgName1-Petclinic-G2
+            email: orgname1-petclinicg2@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425iratxe@gmail.com
+          - name: OrgName1-Petclinic-G3
+            user: OrgName1-Petclinic-G3
+            email: orgname1-petclinicg3@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425josema@gmail.com
+          - name: OrgName1-Petclinic-G4
+            user: OrgName1-Petclinic-G4
+            email: orgname1-petclinicg4@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425paulo@gmail.com
+          - name: OrgName1-Petclinic-G5
+            user: OrgName1-Petclinic-G5
+            email: orgname1-petclinicg5@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425raquel@gmail.com
+  - name: OrgName1-Petclinic-client-platinum
+    code: ORGNAME1-PETCLINIC-PLATINUM
+    teams:
+      - name: OrgName1-Petclinic Platinum clients team
+        x-itop-profiles:
+          - x-itop-profile: Portal power user
+          - x-itop-profile: Portal user
+        members:
+          - name: OrgName1-Petclinic-P1
+            user: OrgName1-Petclinic-P1
+            email: orgname1-petclinicp1@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425pedra@gmail.com
+          - name: OrgName1-Petclinic-P2
+            user: OrgName1-Petclinic-P2
+            email: orgname1-petclinicp2@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425paulo@gmail.com
+          - name: OrgName1-Petclinic-P3
+            user: OrgName1-Petclinic-P3
+            email: orgname1-petclinicp3@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425josema@gmail.com
+          - name: OrgName1-Petclinic-P4
+            user: OrgName1-Petclinic-P4
+            email: orgname1-petclinicp4@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425josema@gmail.com
+  - name: OrgName2-Petclinic-client-gold
+    code: ORGNAME2-PETCLINIC-GOLD
+    teams:
+      - name: OrgName2-Petclinic Gold clients team
+        x-itop-profiles:
+          - x-itop-profile: Portal power user
+          - x-itop-profile: Portal user
+        members:
+          - name: OrgName2-Petclinic-G1
+            user: OrgName2-Petclinic-G1
+            email: orgname2-petclinicg1@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425pedro@gmail.com
+          - name: OrgName2-Petclinic-G2
+            user: OrgName2-Petclinic-G2
+            email: orgname2-petclinicg2@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425maria@gmail.com
+          - name: OrgName2-Petclinic-G3
+            user: OrgName2-Petclinic-G3
+            email: orgname2-petclinicg3@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425julia@gmail.com
+          - name: OrgName2-Petclinic-G4
+            user: OrgName2-Petclinic-G4
+            email: orgname2-petclinicg4@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425julia@gmail.com
+          - name: OrgName2-Petclinic-G5
+            user: OrgName2-Petclinic-G5
+            email: orgname2-petclinicg5@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425julia@gmail.com
+  - name: OrgName2-Petclinic-client-platinum
+    code: ORGNAME2-PETCLINIC-PLATINUM
+    teams:
+      - name: OrgName2-Petclinic Platinum clients team
+        x-itop-profiles:
+          - x-itop-profile: Portal power user
+          - x-itop-profile: Portal user
+        members:
+          - name: OrgName2-Petclinic-P1
+            user: OrgName2-Petclinic-P1
+            email: orgname2-petclinicp1@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425juana@gmail.com
+          - name: OrgName2-Petclinic-P2
+            user: OrgName2-Petclinic-P2
+            email: orgname2-petclinicp2@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425pedro@gmail.com
+          - name: OrgName2-Petclinic-P3
+            user: OrgName2-Petclinic-P3
+            email: orgname2-petclinicp3@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425pedra@gmail.com
+          - name: OrgName2-Petclinic-P4
+            user: OrgName2-Petclinic-P4
+            email: orgname2-petclinicp4@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425paulo@gmail.com
+  - name: OrgName3-Petclinic-client-gold
+    code: ORGNAME3-PETCLINIC-GOLD
+    teams:
+      - name: OrgName3-Petclinic Gold clients team
+        x-itop-profiles:
+          - x-itop-profile: Portal power user
+          - x-itop-profile: Portal user
+        members:
+          - name: OrgName3-Petclinic-G1
+            user: OrgName3-Petclinic-G1
+            email: orgname3-petclinicg1@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425iratxe@gmail.com
+          - name: OrgName3-Petclinic-G2
+            user: OrgName3-Petclinic-G2
+            email: orgname3-petclinicg2@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425maria@gmail.com
+          - name: OrgName3-Petclinic-G3
+            user: OrgName3-Petclinic-G3
+            email: orgname3-petclinicg3@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425iratxe@gmail.com
+          - name: OrgName3-Petclinic-G4
+            user: OrgName3-Petclinic-G4
+            email: orgname3-petclinicg4@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425pedro@gmail.com
+          - name: OrgName3-Petclinic-G5
+            user: OrgName3-Petclinic-G5
+            email: orgname3-petclinicg5@example.com
+            roles:
+              - name: itopGoldClientUser
+            x-itop-default-password: PSG2-2425maria@gmail.com
+  - name: OrgName3-Petclinic-client-platinum
+    code: ORGNAME3-PETCLINIC-PLATINUM
+    teams:
+      - name: OrgName3-Petclinic Platinum clients team
+        x-itop-profiles:
+          - x-itop-profile: Portal power user
+          - x-itop-profile: Portal user
+        members:
+          - name: OrgName3-Petclinic-P1
+            user: OrgName3-Petclinic-P1
+            email: orgname3-petclinicp1@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425raquel@gmail.com
+          - name: OrgName3-Petclinic-P2
+            user: OrgName3-Petclinic-P2
+            email: orgname3-petclinicp2@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425raquel@gmail.com
+          - name: OrgName3-Petclinic-P3
+            user: OrgName3-Petclinic-P3
+            email: orgname3-petclinicp3@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425maria@gmail.com
+          - name: OrgName3-Petclinic-P4
+            user: OrgName3-Petclinic-P4
+            email: orgname3-petclinicp4@example.com
+            roles:
+              - name: itopPlatinumClientUser
+            x-itop-default-password: PSG2-2425maria@gmail.com
+sla:
+  - name: OrgName1-Petclinic-Petclinic-gold
+    guarantees:
+      - scope:
+          x-itop-priority: '*'
+          x-itop-request-type: '*'
+        objectives:
+          ttr:
+            max:
+              value: 48
+              unit: hours
+          tto:
+            max:
+              value: 48
+              unit: hours
+  - name: OrgName1-Petclinic-Petclinic-platinum
+    guarantees:
+      - scope:
+          x-itop-priority: '*'
+          x-itop-request-type: '*'
+        objectives:
+          ttr:
+            max:
+              value: 24
+              unit: hours
+          tto:
+            max:
+              value: 24
+              unit: hours
+  - name: OrgName2-Petclinic-Petclinic-gold
+    guarantees:
+      - scope:
+          x-itop-priority: '*'
+          x-itop-request-type: '*'
+        objectives:
+          ttr:
+            max:
+              value: 48
+              unit: hours
+          tto:
+            max:
+              value: 48
+              unit: hours
+  - name: OrgName2-Petclinic-Petclinic-platinum
+    guarantees:
+      - scope:
+          x-itop-priority: '*'
+          x-itop-request-type: '*'
+        objectives:
+          ttr:
+            max:
+              value: 24
+              unit: hours
+          tto:
+            max:
+              value: 24
+              unit: hours
+  - name: OrgName3-Petclinic-Petclinic-gold
+    guarantees:
+      - scope:
+          x-itop-priority: '*'
+          x-itop-request-type: '*'
+        objectives:
+          ttr:
+            max:
+              value: 48
+              unit: hours
+          tto:
+            max:
+              value: 48
+              unit: hours
+  - name: OrgName3-Petclinic-Petclinic-platinum
+    guarantees:
+      - scope:
+          x-itop-priority: '*'
+          x-itop-request-type: '*'
+        objectives:
+          ttr:
+            max:
+              value: 24
+              unit: hours
+          tto:
+            max:
+              value: 24
+              unit: hours
+  - name: PSG2STAFF-SLA
+    guarantees:
+      - scope:
+          x-itop-priority: '*'
+          x-itop-request-type: '*'
+        objectives:
+          ttr:
+            max:
+              value: 120
+              unit: hours
+          tto:
+            max:
+              value: 48
+              unit: hours
